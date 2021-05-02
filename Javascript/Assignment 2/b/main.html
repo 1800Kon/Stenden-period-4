@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/tailwind.css" rel="stylesheet">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="main.js"></script>
+    <div class="flex flex-col w-screen h-screen">
+        <div class="align-center mx-auto my-auto w-2/6 h-5/6 bg-blue-400 content">
+            <h1 class="text-center mx-auto my-5 font-bold tracking-tighter text-black sm:text-5xl title-font">
+                Calculator
+            </h1>
+            <div class="flex-col h-full w-full bg-blue-300" id="putStuffHere">
+                <input class="flex mx-auto my-5" type="text" id="no1" placeholder="First number">
+                <select class="flex mx-auto" id="action">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                </select>
+                <input class="flex mx-auto my-5" type="text" id="no2" placeholder="Second number">
+                <button onclick="performOperation()"
+                    class="flex mx-auto px-8 py-2 font-semibold text-black bg-white rounded-2xl">Calculate</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
