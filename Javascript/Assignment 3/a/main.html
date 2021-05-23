@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/tailwind.css" rel="stylesheet">
+    <title>Fortune cookie</title>
+    <script type="text/javascript" src="main.js"></script>
+</head>
+
+<body>
+    <div class="flex justify-center h-screen w-screen">
+        <div class="flex flex-col mx-auto h-5/6 w-3/6 bg-blue-100 rounded-3xl">
+            <h1 class="mx-auto my-4 text-2xl font-bold tracking-tighter text-black sm:text-5xl title-font">
+                Fortune cookie</h1>
+            <div>
+                <div class="flex w-full my-5">
+                    <button onclick="addStuff()"
+                        class="bg-blue-500 px-5 mx-auto py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600">Open
+                        cookie</button>
+                </div>
+            </div>
+            <div id="stuff" class="w-3/4 h-5/6 mx-auto bg-blue-200 rounded-3xl overflow-auto">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/tailwind.css" rel="stylesheet">
+    <title>Tacobell</title>
+    <script type="text/javascript" src="main.js"></script>
+</head>
+
+<body>
+    <div class="h-screen w-screen">
+        <div class="flex mx-auto w-2/3 h-1/3">
+            <div class="mx-auto my-auto h-2/3 w-full bg-gray-100">
+                <div class="w-full h-2/3">
+                    <img id="slideshow" src="images/image1.png" class="h-full w=2/3 mx-auto">
+                </div>
+                <div class="w-full h-1/3">
+
+                    <button onclick="previous()"
+                        class="bg-blue-500 h-20 px-5 float-left py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600">&lt;</button>
+                    <button onclick="next()"
+                        class="bg-blue-500 h-20 float-right px-5 py-2 text-lg font-semibold tracking-wider text-white rounded-full hover:bg-blue-600">&gt;</button>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
