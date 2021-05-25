@@ -1,0 +1,37 @@
+.grid {
+    border: 1px solid;
+    height: 120px;
+    width: 140px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.regular {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: cadetblue;
+}
+
+.regular:hover {
+    background-color: rgb(17, 243, 243);
+}
+
+.taken {
+    background-color: white;
+}
+
+.player-one {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: rgb(255, 0, 0);
+}
+
+.player-two {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: rgb(39, 252, 170);
+}
