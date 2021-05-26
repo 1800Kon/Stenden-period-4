@@ -1,7 +1,12 @@
 window.onload = function() {
+
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+    // I did all this with DIVs on purpose, I wanted to see if I could do it like this instead of with a grid :)
+    // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
     const grid = document.getElementById('grid');
 
-    // Loop to create divs inside the main div representing the slots in the main thing
+    // Loop to create divs inside the main grid representing the slots
     for (var i = 0; i < 49; i++) {
         if (i >= 42) {
             const lastRow = document.createElement("div");
@@ -80,6 +85,9 @@ window.onload = function() {
             var playerTokenRight = true;
             var winCounter = 0;
             for (var i = 0; i < 5; i++) {
+                if (playerTokenLeft == false & playerTokenRight == false) {
+                    break;
+                }
                 // Checks to see if we can go to the left
                 if (slots[slotNo - i] == null) {
                     playerTokenLeft = false;
@@ -122,6 +130,9 @@ window.onload = function() {
             var winCounter = 0;
             var valueToMove = 0;
             for (var i = 0; i < 6; i++) {
+                if (playerTokenUp == false && playerTokenDown == false) {
+                    break;
+                }
                 if (playerTokenUp) {
                     // Check above to see if a token is correct
                     if (slots[slotNo - valueToMove].className == classToLookFor) {
@@ -166,7 +177,161 @@ window.onload = function() {
         }
 
         function checkDiagonally(slotNo) {
+            var playerTokenTL = true;
+            var playerTokenTR = true;
+            var playerTokenBL = true;
+            var playerTokenBR = true;
+            var winCounter = 0;
+            var valueToMove = 0;
+            var stopCheckingLeft = [
+                0,
+                7,
+                14,
+                21,
+                28,
+                35,
+                42
+            ];
+            var stopCheckingRight = [
+                6,
+                13,
+                20,
+                27,
+                34,
+                41
+            ];
 
+            // Check if its possible to check the left or right slots to the token
+            function stopCheckingGeneral(slotNo) {
+                if (stopCheckingLeft.includes(slotNo)) {
+                    playerTokenTL = false;
+                    playerTokenBL = false;
+                } else {
+                    if (stopCheckingRight.includes(slotNo)) {
+                        playerTokenTR = false
+                        playerTokenBR = false;
+                    }
+                }
+            }
+            // Perform the check for which checks to do
+            stopCheckingGeneral(slotNo)
+
+            // Check diagonally towards the top left side of the token
+            if (gamePlayable) {
+                if (playerTokenTL) {
+                    for (var i = 0; i < 7; i++) {
+                        if (slots[slotNo - (valueToMove + i)].className == classToLookFor) {
+                            winCounter++;
+                            valueToMove += 7
+                            if (slotNo - (valueToMove + i) <= 6) {
+                                playerTokenTL = false;
+                                if (winCounter >= 4) {
+                                    alert("Player " + currentPlayer + " won!");
+                                    gamePlayable = false;
+                                    break;
+                                }
+                            }
+                        } else {
+                            playerTokenTL = false;
+                            valueToMove = 7;
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+            // Check diagonally towards the bottom right side of the token
+            if (gamePlayable) {
+                if (playerTokenBR) {
+                    for (var i = 1; i < 8; i++) {
+                        if (slotNo + (valueToMove + i) > 41) {
+                            if (winCounter >= 4) {
+                                alert("Player " + currentPlayer + " won!");
+                                gamePlayable = false;
+                                break;
+                            }
+                            playerTokenBR = false;
+                            valueToMove = 0;
+                            winCounter = 0;
+                            break;
+                        }
+                        if (slots[slotNo + (valueToMove + i)].className == classToLookFor) {
+                            winCounter++;
+                            valueToMove += 7
+                        } else {
+                            if (winCounter >= 4) {
+                                alert("Player " + currentPlayer + " won!");
+                                gamePlayable = false;
+                                break;
+                            } else {
+                                playerTokenBR = false;
+                                valueToMove = 0;
+                                winCounter = 0;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            // Check diagonally towards the bottom left side of the token
+            if (gamePlayable) {
+                if (playerTokenBL) {
+                    valueToMove = 0;
+                    for (var i = 0; i < 8; i++) {
+                        if (slots[slotNo + (valueToMove - i)].className == classToLookFor) {
+                            winCounter++;
+                            valueToMove += 7
+                            if (slotNo + (valueToMove - i) > 35) {
+                                playerTokenBL = false;
+                            }
+                        } else {
+                            if (winCounter >= 4) {
+                                alert("Player " + currentPlayer + " won!");
+                                gamePlayable = false;
+                                break;
+                            } else {
+                                playerTokenBL = false;
+                                valueToMove = 7;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    var executedBL = false;
+                }
+            }
+
+            // Check diagonally towards the top right side of the token
+            if (gamePlayable) {
+                if (playerTokenTR) {
+                    if (executedBL) {
+                        var patch = 1;
+                    } else {
+                        patch = 0;
+                    }
+                    for (var i = 1; i < 8; i++) {
+                        if (slots[slotNo - (valueToMove - (i - patch))].className == classToLookFor) {
+                            winCounter++;
+                            valueToMove += 7
+                            if (slotNo - (valueToMove - i) <= 6) {
+                                playerTokenTR = false;
+                            }
+                            if (winCounter >= 4) {
+                                alert("Player " + currentPlayer + " won!");
+                                gamePlayable = false;
+                                break;
+                            }
+                        } else {
+                            playerTokenTR = false;
+                            valueToMove = 7;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         checkHorizontally(slotNo);
